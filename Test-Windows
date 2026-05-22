@@ -1,0 +1,15 @@
+---
+- name: Test Ansible Connection to Windows Server 2022
+  hosts: windows
+  gather_facts: no
+  tasks:
+    - name: Ping the Windows Server
+      ansible.windows.win_ping:
+
+    - name: Get OS version (Optional verification)
+      ansible.windows.win_command: systeminfo | findstr /B /C:"OS Name"
+      register: os_info
+
+    - name: Display OS Name
+      debug:
+        msg: "{{ os_info.stdout_lines[0] }}"
