@@ -1,0 +1,12 @@
+---
+- name: Restart Service on Legacy Windows 2008
+  hosts: all
+  gather_facts: false
+  become: false
+  tasks:
+    - name: Stop the service via CMD
+      ansible.builtin.raw: net stop "Spooler"
+      ignore_errors: true # In case it's already stopped
+
+    - name: Start the service via CMD
+      ansible.builtin.raw: net start "Spooler"
