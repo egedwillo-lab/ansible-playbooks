@@ -4,9 +4,9 @@
   gather_facts: false
   become: false
   tasks:
-    - name: Stop the service via CMD
-      ansible.builtin.raw: net stop "Spooler"
-      ignore_errors: true # In case it's already stopped
+    - name: Stop the service (force Yes for dependencies)
+      ansible.builtin.raw: cmd.exe /c "net stop Spooler /y"
+      ignore_errors: true 
 
-    - name: Start the service via CMD
-      ansible.builtin.raw: net start "Spooler"
+    - name: Start the service
+      ansible.builtin.raw: cmd.exe /c "net start Spooler"
