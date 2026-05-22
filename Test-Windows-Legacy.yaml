@@ -1,0 +1,13 @@
+---
+- name: Test Legacy Windows 2008 Connection
+  hosts: all
+  gather_facts: false
+  become: false
+  tasks:
+    - name: Ping using raw CMD
+      ansible.builtin.raw: echo pong
+      register: legacy_ping
+
+    - name: Show Result
+      ansible.builtin.debug:
+        var: legacy_ping.stdout_lines
